@@ -1,4 +1,6 @@
-﻿@{
+﻿@model WebCalc.ViewModel.UserCalcViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -7,25 +9,95 @@
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <form name="calculator" class="form-horizontal">
+        <hr />
+        <table>
+            <tr>
+                @*<td colspan="4">
+            <input type="text" name="display" id="display" disabled>
+        </td>*@
+            </tr>
+            <tr>
+                <td><input type="button" name="one" value="1" onclick="display.value += '1'"></td>
+                <td><input type="button" name="two" value="2" onclick="display.value += '2'"></td>
+                <td><input type="button" name="three" value="3" onclick="display.value += '3'"></td>
+                <td><input type="button" class="operator" name="plus" value="+" onclick="display.value += '+'"></td>
+            </tr>
+            <tr>
+                <td><input type="button" name="four" value="4" onclick="display.value += '4'"></td>
+                <td><input type="button" name="five" value="5" onclick="display.value += '5'"></td>
+                <td><input type="button" name="six" value="6" onclick="display.value += '6'"></td>
+                <td><input type="button" class="operator" name="minus" value="-" onclick="display.value += '-'"></td>
+            </tr>
+            <tr>
+                <td><input type="button" name="seven" value="7" onclick="display.value += '7'"></td>
+                <td><input type="button" name="eight" value="8" onclick="display.value += '8'"></td>
+                <td><input type="button" name="nine" value="9" onclick="display.value += '9'"></td>
+                <td><input type="button" class="operator" name="times" value="x" onclick="display.value += '*'"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="clear" name="clear" value="c" onclick="display.value = ''"></td>
+                <td><input type="button" name="zero" value="0" onclick="display.value += '0'"></td>
+                <td><input type="button" name="doit" value="=" onclick="display.value = eval(display.value)"></td>
+                <td><input type="button" class="operator" name="div" value="/" onclick="display.value += '/'"></td>
+            </tr>
+        </table>
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Формула</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Input, new { Name = "display", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Input, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="1" class="btn btn-default" onclick=""/>
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Получить результат" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+}
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<div>
+    <div>
+        @Html.DisplayFor(model => model.PreResult)
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div>
+        @Html.DisplayFor(model => model.Result)
     </div>
 </div>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend style="color:blue">
+            Operation Of Two Numbers
+        </legend>    
+        @Html.Editor("")
+        <br />
+        <br />
+        @Html.Editor("")
+        <br />
+        <br />
+        <input type = "submit" value = "add" name = "command"/>
+        <input type = "submit" value = "sub" name = "command" />
+        <input type = "submit" value = "mul" name = "command" />
+        <input type = "submit" value = "div" name = "command" />
+        <br />
+        <br />
+        <h2 style="color:red">
+            @Html.Label("Result is :")
+
+            @Html.DisplayFor(x => x.Result)
+        </h2>
+    </fieldset>    
+}

@@ -3,28 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebCalc.Service;
+using WebCalc.ViewModel;
 
 namespace WebCalc.Controllers
 {
     public class HomeController : Controller
     {
+        private CalcService service = new CalcService();
+
         public ActionResult Index()
         {
-            return View();
+            var model = new UserCalcViewModel();
+            /*string ipAddress = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            if (string.IsNullOrEmpty(ipAddress))
+            {
+                ipAddress = Request.ServerVariables["REMOTE_ADDR"];
+            }*/
+            model.IpAddress = Request.UserHostAddress;
+            service.GetUserHistory(model).GetAwaiter().GetResult();
+            return View(model);
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Index(UserCalcViewModel model)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            
+            if (model.IsResult && !string.IsNullOrEmpty(model.Input))
+            {
+                model.IpAddress = Request.UserHostAddress;
+                service.Caltulate(model).GetAwaiter().GetResult();
+            }
+            else if (!string.IsNullOrEmpty(model.Input))
+            {
+                service.GetPreCalculation(model).GetAwaiter().GetResult();
+            }
+            
+            return View(model);
         }
     }
 }
