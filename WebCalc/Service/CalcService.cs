@@ -15,9 +15,10 @@ namespace WebCalc.Service
         {
             using (var db = new BaseContext())
             {
-                var dateTo = DateTime.Today.AddDays(1);
+                var dateFrom =  DateTime.UtcNow.Date;
+                var dateTo = dateFrom.AddDays(1);
                 model.Calculations = db.UserCalculations
-                    .Where(x => x.IpAddress == model.IpAddress && x.DateCreate >= DateTime.Today && x.DateCreate < dateTo)
+                    .Where(x => x.IpAddress == model.IpAddress && x.DateCreate >= dateFrom && x.DateCreate < dateTo)
                     .OrderByDescending(o => o.DateCreate)
                     .ToList();
             }
@@ -35,6 +36,17 @@ namespace WebCalc.Service
             return model;
         }
 
+        public async Task Clear(string ipAddress)
+        {
+            using (var db = new BaseContext())
+            {
+                var calcs = db.UserCalculations.Where(x => x.IpAddress == ipAddress).ToList();
+                db.UserCalculations.RemoveRange(calcs);
+                db.SaveChanges();
+                return;
+            }
+        }
+
         public async Task<UserCalcViewModel> Caltulate(UserCalcViewModel model)
         {
             using (var db = new BaseContext())
@@ -46,6 +58,7 @@ namespace WebCalc.Service
                     Result = Calculation.Calculate(model.Input).ToString(),
                     DateCreate = DateTime.UtcNow
                 };
+                model.Result = calc.Result;
                 db.UserCalculations.Add(calc);
                 db.SaveChanges();
                 model = await GetUserHistory(model);

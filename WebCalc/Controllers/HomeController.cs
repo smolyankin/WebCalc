@@ -26,16 +26,27 @@ namespace WebCalc.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(UserCalcViewModel model)
+        public ActionResult Index(UserCalcViewModel model, FormCollection formCollection)
         {
-            
+            model.Input = formCollection[1].ToString();
             if (!string.IsNullOrEmpty(model.Input))
             {
                 model.IpAddress = Request.UserHostAddress;
                 model = service.Caltulate(model).GetAwaiter().GetResult();
+                model.Input = string.Empty;
             }
             
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Clear()
+        {
+            service.Clear(Request.UserHostAddress).GetAwaiter().GetResult();
+            //model.IpAddress = Request.UserHostAddress;
+            //service.GetUserHistory(model).GetAwaiter().GetResult();
+
+            return Redirect("Index");
         }
     }
 }

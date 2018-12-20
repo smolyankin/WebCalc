@@ -12,64 +12,100 @@
 {
     @Html.AntiForgeryToken()
 
-<form name="calculator" class="form-horizontal" style="padding-bottom: 10px;">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @*<label class="control-label col-md-2">Формула</label>*@
-        <div class="col-md-10">
-            @Html.EditorFor(model => Model.Input, new { Name = "display", htmlAttributes = new { @class = "form-control" } })
-            @*@Html.ValidationMessageFor(model => Model.Input, "", new { @class = "text-danger" })*@
+    <form name="calculator" class="form-horizontal" style="padding-bottom: 10px;">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @*<label class="control-label col-md-2">Формула</label>*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Input, null, "display", new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.ValidationMessageFor(model => Model.Input, "", new { @class = "text-danger" })*@
+            </div>
         </div>
-    </div>
-    <br />
-    <table>
-        <tr>
-            @*<td colspan="4">
-                    <input type="text" name="display" id="display" disabled>
-                </td>*@
-        </tr>
-        <tr>
-            <td style="padding: 5px;"><input style="min-width: 40px;" type="button" name="one" value="1" class="btn btn-lg" onclick="display.value += '1'"></td>
-            <td style="padding: 5px;"><input type="button" name="two" value="2" class="btn btn-lg" onclick="display.value += '2'"></td>
-            <td style="padding: 5px;"><input type="button" name="three" value="3" class="btn btn-lg" onclick="display.value += '3'"></td>
-            <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="plus" value="+" class="btn btn-lg" onclick="display.value += '+'"></td>
-        </tr>
-        <tr>
-            <td style="padding: 5px;"><input type="button" name="four" value="4" class="btn btn-lg" onclick="display.value += '4'"></td>
-            <td style="padding: 5px;"><input type="button" name="five" value="5" class="btn btn-lg" onclick="display.value += '5'"></td>
-            <td style="padding: 5px;"><input type="button" name="six" value="6" class="btn btn-lg" onclick="display.value += '6'"></td>
-            <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="minus" value="-" class="btn btn-lg" onclick="display.value += '-'"></td>
-        </tr>
-        @*class="operator" *@
-        <tr>
-            <td style="padding: 5px;"><input type="button" name="seven" value="7" class="btn btn-lg" onclick="display.value += '7'"></td>
-            <td style="padding: 5px;"><input type="button" name="eight" value="8" class="btn btn-lg" onclick="display.value += '8'"></td>
-            <td style="padding: 5px;"><input type="button" name="nine" value="9" class="btn btn-lg" onclick="display.value += '9'"></td>
-            <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="times" value="x" class="btn btn-lg" onclick="display.value += '*'"></td>
-        </tr>
-        <tr>
-            <td style="padding: 5px;"><input type="button" id="clear" name="clear" value="c" class="btn btn-lg" onclick="display.value = ''"></td>
-            <td style="padding: 5px;"><input type="button" name="zero" value="0" class="btn btn-lg" onclick="display.value += '0'"></td>
-            <td style="padding: 5px;"><input type="submit" name="doit" value="=" class="btn btn-lg" onclick="display.value = eval(display.value)"></td>
-            <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="div" value="/" class="btn btn-lg" onclick="display.value += '/'"></td>
-        </tr>
-    </table>
-    <div class="form-group">
-        @*<label class="control-label col-md-2">Формула</label>*@
-        <div class="col-md-10">
-            @Html.DisplayFor(model => Model.Result, new { Name = "result", htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => Model.Result, "", new { @class = "text-danger" })
+        <br />
+        <table>
+            <tr>
+                @*<td colspan="4">
+                        <input type="text" name="display" id="display" disabled>
+                    </td>*@
+            </tr>
+            <tr>
+                <td style="padding: 5px;"><input style="min-width: 40px;" type="button" name="one" value="1" class="btn btn-lg" onclick="display.value += '1'"></td>
+                <td style="padding: 5px;"><input type="button" name="two" value="2" class="btn btn-lg" onclick="display.value += '2'"></td>
+                <td style="padding: 5px;"><input type="button" name="three" value="3" class="btn btn-lg" onclick="display.value += '3'"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="plus" value="+" class="btn btn-lg" onclick="display.value += '+'"></td>
+            </tr>
+            <tr>
+                <td style="padding: 5px;"><input type="button" name="four" value="4" class="btn btn-lg" onclick="display.value += '4'"></td>
+                <td style="padding: 5px;"><input type="button" name="five" value="5" class="btn btn-lg" onclick="display.value += '5'"></td>
+                <td style="padding: 5px;"><input type="button" name="six" value="6" class="btn btn-lg" onclick="display.value += '6'"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="minus" value="-" class="btn btn-lg" onclick="display.value += '-'"></td>
+            </tr>
+            @*class="operator" *@
+            <tr>
+                <td style="padding: 5px;"><input type="button" name="seven" value="7" class="btn btn-lg" onclick="display.value += '7'"></td>
+                <td style="padding: 5px;"><input type="button" name="eight" value="8" class="btn btn-lg" onclick="display.value += '8'"></td>
+                <td style="padding: 5px;"><input type="button" name="nine" value="9" class="btn btn-lg" onclick="display.value += '9'"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="times" value="x" class="btn btn-lg" onclick="display.value += '*'"></td>
+            </tr>
+            <tr>
+                <td style="padding: 5px;"><input type="button" id="clear" name="clear" value="c" class="btn btn-lg" onclick="display.value = ''"></td>
+                <td style="padding: 5px;"><input type="button" name="zero" value="0" class="btn btn-lg" onclick="display.value += '0'"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" id="dot" name="dot" value="." class="btn btn-lg" onclick="display.value += '.'"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="div" value="/" class="btn btn-lg" onclick="display.value += '/'"></td>
+            </tr>
+            <tr>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="left" value="(" class="btn btn-lg" onclick="display.value += '('"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="right" value=")" class="btn btn-lg" onclick="display.value += ')'"></td>
+                <td style="padding: 5px;"><input type="submit" name="doit" value="=" class="btn btn-lg"></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="form-group">
+            @*<label class="control-label col-md-2">Формула</label>*@
+            <div class="col-md-10" style="font-size: 60px;">
+                @Html.DisplayFor(model => Model.Result, new { Name = "result", htmlAttributes = new { @class = "bg-success" } })
+                @Html.ValidationMessageFor(model => Model.Result, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 }
+@using (Html.BeginForm("Clear", "Home", FormMethod.Post))
+{
+    <div style="padding: 5px;">
+        <input type="submit" name="clear" value="Очистить историю вычислений" class="btn-danger">
+    </div>
+    
+}
+@if (Model.Calculations.Any())
+{
+    <table class="table">
+        <tr>
+            <th>
+                Запрос
+            </th>
+            <th>
+                Результат
+            </th>
+            <th>
+                Дата
+            </th>
+        </tr>
+        @foreach (var calc in Model.Calculations)
+        {
+            var date = calc.DateCreate.ToString();
 
-<div>
-    <div>
-        @Html.DisplayFor(model => model.PreResult)
-    </div>
-    <div>
-        @Html.DisplayFor(model => model.Result)
-    </div>
-</div>
+            <tr>
+                <td style="padding: 5px;">
+                    @Html.DisplayFor(model => calc.Input, new { htmlAttributes = new { @class = "col-md-12" } })
+                </td>
+                <td style="padding: 5px;">
+                    @Html.DisplayFor(model => calc.Result, new { htmlAttributes = new { @class = "col-md-12" } })
+                </td>
+                <td style="padding: 5px;">
+                    @Html.DisplayFor(model => date, new { htmlAttributes = new { @class = "col-md-12" } })
+                </td>
+            </tr>
+        }
+    </table>
+}
