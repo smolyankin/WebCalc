@@ -29,14 +29,10 @@ namespace WebCalc.Controllers
         public ActionResult Index(UserCalcViewModel model)
         {
             
-            if (model.IsResult && !string.IsNullOrEmpty(model.Input))
+            if (!string.IsNullOrEmpty(model.Input))
             {
                 model.IpAddress = Request.UserHostAddress;
-                service.Caltulate(model).GetAwaiter().GetResult();
-            }
-            else if (!string.IsNullOrEmpty(model.Input))
-            {
-                service.GetPreCalculation(model).GetAwaiter().GetResult();
+                model = service.Caltulate(model).GetAwaiter().GetResult();
             }
             
             return View(model);
