@@ -1,10 +1,14 @@
 ﻿@model WebCalc.ViewModel.UserCalcViewModel
 
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
     ViewBag.Title = "Веб Калькулятор";
 }
 
-<div class="jumbotron">
+<div>
     <h1>Веб калькулятор</h1>
     <p class="lead">Веб калькулятор запоминает адрес вашего компьютера и показывает историю ваших вычислений</p>
 </div>
@@ -30,34 +34,34 @@
                     </td>*@
             </tr>
             <tr>
-                <td style="padding: 5px;"><input style="min-width: 40px;" type="button" name="one" value="1" class="btn btn-lg" onclick="display.value += '1'"></td>
-                <td style="padding: 5px;"><input type="button" name="two" value="2" class="btn btn-lg" onclick="display.value += '2'"></td>
-                <td style="padding: 5px;"><input type="button" name="three" value="3" class="btn btn-lg" onclick="display.value += '3'"></td>
-                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="plus" value="+" class="btn btn-lg" onclick="display.value += '+'"></td>
+                <td><input type="button" name="one" value="1" class="btn btn-lg my-btn" onclick="display.value += '1'"></td>
+                <td><input type="button" name="two" value="2" class="btn btn-lg my-btn" onclick="display.value += '2'"></td>
+                <td><input type="button" name="three" value="3" class="btn btn-lg my-btn" onclick="display.value += '3'"></td>
+                <td><input type="button" name="plus" value="+" class="btn btn-lg my-btn" onclick="display.value += '+'"></td>
             </tr>
             <tr>
-                <td style="padding: 5px;"><input type="button" name="four" value="4" class="btn btn-lg" onclick="display.value += '4'"></td>
-                <td style="padding: 5px;"><input type="button" name="five" value="5" class="btn btn-lg" onclick="display.value += '5'"></td>
-                <td style="padding: 5px;"><input type="button" name="six" value="6" class="btn btn-lg" onclick="display.value += '6'"></td>
-                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="minus" value="-" class="btn btn-lg" onclick="display.value += '-'"></td>
+                <td style="padding: 5px;"><input type="button" name="four" value="4" class="btn btn-lg my-btn" onclick="display.value += '4'"></td>
+                <td style="padding: 5px;"><input type="button" name="five" value="5" class="btn btn-lg my-btn" onclick="display.value += '5'"></td>
+                <td style="padding: 5px;"><input type="button" name="six" value="6" class="btn btn-lg my-btn" onclick="display.value += '6'"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="minus" value="-" class="btn btn-lg my-btn" onclick="display.value += '-'"></td>
             </tr>
             @*class="operator" *@
             <tr>
-                <td style="padding: 5px;"><input type="button" name="seven" value="7" class="btn btn-lg" onclick="display.value += '7'"></td>
-                <td style="padding: 5px;"><input type="button" name="eight" value="8" class="btn btn-lg" onclick="display.value += '8'"></td>
-                <td style="padding: 5px;"><input type="button" name="nine" value="9" class="btn btn-lg" onclick="display.value += '9'"></td>
-                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="times" value="x" class="btn btn-lg" onclick="display.value += '*'"></td>
+                <td style="padding: 5px;"><input type="button" name="seven" value="7" class="btn btn-lg my-btn" onclick="display.value += '7'"></td>
+                <td style="padding: 5px;"><input type="button" name="eight" value="8" class="btn btn-lg my-btn" onclick="display.value += '8'"></td>
+                <td style="padding: 5px;"><input type="button" name="nine" value="9" class="btn btn-lg my-btn" onclick="display.value += '9'"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="times" value="x" class="btn btn-lg my-btn" onclick="display.value += '*'"></td>
             </tr>
             <tr>
-                <td style="padding: 5px;"><input type="button" id="clear" name="clear" value="c" class="btn btn-lg" onclick="display.value = ''"></td>
-                <td style="padding: 5px;"><input type="button" name="zero" value="0" class="btn btn-lg" onclick="display.value += '0'"></td>
-                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" id="dot" name="dot" value="." class="btn btn-lg" onclick="display.value += '.'"></td>
-                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="div" value="/" class="btn btn-lg" onclick="display.value += '/'"></td>
+                <td style="padding: 5px;"><input type="button" id="clear" name="clear" value="c" class="btn btn-lg my-btn" onclick="display.value = ''"></td>
+                <td style="padding: 5px;"><input type="button" name="zero" value="0" class="btn btn-lg my-btn" onclick="display.value += '0'"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" id="dot" name="dot" value="." class="btn btn-lg my-btn" onclick="display.value += '.'"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="div" value="/" class="btn btn-lg my-btn" onclick="display.value += '/'"></td>
             </tr>
             <tr>
-                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="left" value="(" class="btn btn-lg" onclick="display.value += '('"></td>
-                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="right" value=")" class="btn btn-lg" onclick="display.value += ')'"></td>
-                <td style="padding: 5px;"><input type="submit" name="doit" value="=" class="btn btn-lg"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="left" value="(" class="btn btn-lg my-btn" onclick="display.value += '('"></td>
+                <td style="padding: 5px;"><input style="min-height: 45px; min-width: 45px;" type="button" name="right" value=")" class="btn btn-lg my-btn" onclick="display.value += ')'"></td>
+                <td style="padding: 5px;"><input type="submit" name="doit" value="=" class="btn btn-lg my-btn doit"></td>
                 <td></td>
             </tr>
         </table>
@@ -73,9 +77,9 @@
 @using (Html.BeginForm("Clear", "Home", FormMethod.Post))
 {
     <div style="padding: 5px;">
-        <input type="submit" name="clear" value="Очистить историю вычислений" class="btn-danger">
+        <input type="submit" name="clear" value="Очистить историю вычислений" class="btn-danger my-danger">
     </div>
-    
+
 }
 @if (Model.Calculations.Any())
 {
