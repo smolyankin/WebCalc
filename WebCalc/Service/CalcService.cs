@@ -58,7 +58,8 @@ namespace WebCalc.Service
         {
             using (var db = new BaseContext())
             {
-                var calResult = Calculation.Calculate(model.Input).ToString();
+                var input = model.Input.Replace(",", ".");
+                var calResult = Calculation.Calculate(input).ToString();
                 var calc = new UserCalculation
                 {
                     IpAddress = model.IpAddress,
